@@ -1,0 +1,1 @@
+sysbench /usr/share/sysbench/oltp_common.lua --db-driver=pgsql --report-interval=2 --threads=5 --time=10 --pgsql-user=tcn --pgsql-db=postgres --pgsql-db=sfxdb --table-size=10000000 --histogram=on  prepare > 0916.out

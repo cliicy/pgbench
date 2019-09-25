@@ -1,0 +1,712 @@
+2019-09-16 15:25:44.606 CST [25382] LOG:  listening on IPv6 address "::1", port 5432
+2019-09-16 15:25:44.606 CST [25382] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2019-09-16 15:25:44.636 CST [25382] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2019-09-16 15:25:44.659 CST [25383] LOG:  database system was interrupted; last known up at 2019-09-16 15:09:18 CST
+2019-09-16 15:25:44.676 CST [25383] LOG:  database system was not properly shut down; automatic recovery in progress
+2019-09-16 15:25:44.677 CST [25383] LOG:  redo starts at 0/16B1600
+2019-09-16 15:25:44.677 CST [25383] LOG:  invalid record length at 0/16B16E0: wanted 24, got 0
+2019-09-16 15:25:44.677 CST [25383] LOG:  redo done at 0/16B16A8
+2019-09-16 15:25:44.684 CST [25382] LOG:  database system is ready to accept connections
+2019-09-16 15:32:24.386 CST [7396] FATAL:  database "tcn" does not exist
+2019-09-16 15:32:44.355 CST [8090] FATAL:  database "tcn" does not exist
+2019-09-16 15:33:42.286 CST [10080] FATAL:  database "tcn" does not exist
+2019-09-16 15:33:53.639 CST [10482] FATAL:  database "tcn" does not exist
+2019-09-16 15:35:31.277 CST [13840] FATAL:  role "postgres" does not exist
+2019-09-16 15:35:38.623 CST [14097] FATAL:  database "tcn" does not exist
+2019-09-16 15:35:45.970 CST [14360] FATAL:  database "tcn" does not exist
+2019-09-16 15:36:49.467 CST [16668] FATAL:  database "tcn" does not exist
+2019-09-16 15:45:27.369 CST [16926] ERROR:  syntax error at or near "pgbench" at character 1
+2019-09-16 15:45:27.369 CST [16926] STATEMENT:  pgbench
+	pgbench sfxdb
+	?
+	/?
+	pgbench -i sfxdb
+	pgbench -i benchdb
+	show dbs;
+2019-09-16 18:17:51.680 CST [32391] ERROR:  relation "sbtest1" already exists
+2019-09-16 18:17:51.680 CST [32391] STATEMENT:  CREATE TABLE sbtest1(
+	  id SERIAL,
+	  k INTEGER DEFAULT '0' NOT NULL,
+	  c CHAR(120) DEFAULT '' NOT NULL,
+	  pad CHAR(60) DEFAULT '' NOT NULL,
+	  PRIMARY KEY (id)
+	)  
+2019-09-16 18:21:41.573 CST [10854] FATAL:  database "tcn" does not exist
+2019-09-16 18:21:53.852 CST [11391] FATAL:  database "tcn" does not exist
+2019-09-16 18:26:14.961 CST [22966] FATAL:  database "sbtest2" does not exist
+2019-09-16 18:26:14.961 CST [22967] FATAL:  database "sbtest2" does not exist
+2019-09-16 18:26:14.961 CST [22968] FATAL:  database "sbtest2" does not exist
+2019-09-16 18:26:14.961 CST [22969] FATAL:  database "sbtest2" does not exist
+2019-09-16 18:26:14.962 CST [22970] FATAL:  database "sbtest2" does not exist
+2019-09-16 18:31:20.863 CST [4566] FATAL:  database "sbtest" does not exist
+2019-09-16 18:32:35.141 CST [5603] ERROR:  relation "sfxdb" does not exist
+2019-09-16 18:32:35.141 CST [5603] STATEMENT:  truncate table sfxdb;
+2019-09-16 18:32:47.940 CST [5603] ERROR:  relation "sbtest" does not exist
+2019-09-16 18:32:47.940 CST [5603] STATEMENT:  truncate table sbtest;
+2019-09-16 18:33:14.349 CST [5603] ERROR:  relation "sbtest" does not exist
+2019-09-16 18:33:14.349 CST [5603] STATEMENT:  truncate table sbtest cascade;
+2019-09-16 18:33:36.582 CST [10918] ERROR:  relation "sbtest1" already exists
+2019-09-16 18:33:36.582 CST [10918] STATEMENT:  CREATE TABLE sbtest1(
+	  id SERIAL,
+	  k INTEGER DEFAULT '0' NOT NULL,
+	  c CHAR(120) DEFAULT '' NOT NULL,
+	  pad CHAR(60) DEFAULT '' NOT NULL,
+	  PRIMARY KEY (id)
+	)  
+2019-09-16 18:34:03.559 CST [5603] ERROR:  syntax error at or near "truncate" at character 10
+2019-09-16 18:34:03.559 CST [5603] STATEMENT:  select *
+	truncate table sbtest1 cascade;
+2019-09-16 18:34:14.482 CST [5603] ERROR:  syntax error at or near "truncate" at character 10
+2019-09-16 18:34:14.482 CST [5603] STATEMENT:  select *
+	truncate table sbtest1 cascade;
+2019-09-16 18:34:20.563 CST [12900] FATAL:  database "sbtest" does not exist
+2019-09-16 18:34:32.750 CST [13039] ERROR:  relation "sfxdb" does not exist at character 15
+2019-09-16 18:34:32.750 CST [13039] STATEMENT:  select * from sfxdb;
+2019-09-16 18:34:41.696 CST [13039] ERROR:  relation "sbtable1" does not exist at character 15
+2019-09-16 18:34:41.696 CST [13039] STATEMENT:  select * from sbtable1;
+2019-09-16 18:48:47.950 CST [18895] ERROR:  relation "sbtest1" already exists
+2019-09-16 18:48:47.950 CST [18895] STATEMENT:  CREATE TABLE sbtest1(
+	  id SERIAL,
+	  k INTEGER DEFAULT '0' NOT NULL,
+	  c CHAR(120) DEFAULT '' NOT NULL,
+	  pad CHAR(60) DEFAULT '' NOT NULL,
+	  PRIMARY KEY (id)
+	)  
+2019-09-16 18:49:54.438 CST [20675] ERROR:  syntax error at or near "sbtest1" at character 6
+2019-09-16 18:49:54.438 CST [20675] STATEMENT:  drop sbtest1;
+2019-09-16 18:59:43.817 CST [15444] ERROR:  relation "sbtest1" already exists
+2019-09-16 18:59:43.817 CST [15444] STATEMENT:  CREATE TABLE sbtest1(
+	  id SERIAL,
+	  k INTEGER DEFAULT '0' NOT NULL,
+	  c CHAR(120) DEFAULT '' NOT NULL,
+	  pad CHAR(60) DEFAULT '' NOT NULL,
+	  PRIMARY KEY (id)
+	)  
+2019-09-16 19:08:32.193 CST [4209] ERROR:  canceling autovacuum task
+2019-09-16 19:08:32.193 CST [4209] CONTEXT:  automatic analyze of table "sfxdb.public.sbtest1"
+2019-09-17 11:17:31.418 CST [20193] LOG:  could not receive data from client: Connection reset by peer
+2019-09-17 11:19:06.545 CST [11916] FATAL:  terminating connection due to unexpected postmaster exit
+2019-09-23 18:58:19.206 CST [15463] LOG:  listening on IPv6 address "::1", port 5432
+2019-09-23 18:58:19.214 CST [15463] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2019-09-23 18:58:19.243 CST [15463] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2019-09-23 18:58:19.256 CST [15464] LOG:  database system was shut down at 2019-09-23 18:57:09 CST
+2019-09-23 18:58:19.261 CST [15463] LOG:  database system is ready to accept connections
+2019-09-23 19:05:08.900 CST [15862] FATAL:  database "tcn" does not exist
+2019-09-23 19:23:16.904 CST [16660] ERROR:  syntax error at or near "、？" at character 1
+2019-09-23 19:23:16.904 CST [16660] STATEMENT:  、？
+	show dbs;
+2019-09-24 09:32:43.970 CST [15463] LOG:  received fast shutdown request
+2019-09-24 09:32:43.970 CST [15463] LOG:  aborting any active transactions
+2019-09-24 09:32:43.970 CST [16660] FATAL:  terminating connection due to administrator command
+2019-09-24 09:32:43.971 CST [16275] FATAL:  terminating connection due to administrator command
+2019-09-24 09:32:43.971 CST [15463] LOG:  worker process: logical replication launcher (PID 15470) exited with exit code 1
+2019-09-24 09:32:43.974 CST [15465] LOG:  shutting down
+2019-09-24 09:32:43.985 CST [15463] LOG:  database system is shut down
+2019-09-24 09:35:11.574 CST [19926] LOG:  listening on IPv6 address "::1", port 5432
+2019-09-24 09:35:11.574 CST [19926] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2019-09-24 09:35:11.633 CST [19926] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2019-09-24 09:35:11.646 CST [19927] LOG:  database system was shut down at 2019-09-24 09:35:11 CST
+2019-09-24 09:35:11.650 CST [19926] LOG:  database system is ready to accept connections
+2019-09-24 09:37:08.727 CST [20018] FATAL:  database "tcn" does not exist
+2019-09-24 09:38:36.331 CST [20026] ERROR:  syntax error at or near "/" at character 1
+2019-09-24 09:38:36.331 CST [20026] STATEMENT:  /list
+	create database vanda
+	/list
+	create database vanda;
+2019-09-24 09:42:16.751 CST [20225] ERROR:  database "tmplate0" does not exist
+2019-09-24 09:42:16.751 CST [20225] STATEMENT:  select pg_database_size('tmplate0')/1024/1024||'M';
+2019-09-24 09:42:58.898 CST [20225] ERROR:  relation "vanda" does not exist at character 15
+2019-09-24 09:42:58.898 CST [20225] STATEMENT:  select * from vanda;
+2019-09-24 09:44:34.513 CST [20225] ERROR:  relation "vanda" does not exist at character 22
+2019-09-24 09:44:34.513 CST [20225] STATEMENT:  select count(1) from vanda;
+2019-09-24 09:44:44.047 CST [20225] ERROR:  syntax error at or near "use" at character 1
+2019-09-24 09:44:44.047 CST [20225] STATEMENT:  use vanda;
+2019-09-24 09:46:26.664 CST [20225] ERROR:  relation "postgres" does not exist at character 15
+2019-09-24 09:46:26.664 CST [20225] STATEMENT:  select * from postgres;
+2019-09-24 09:48:17.013 CST [20225] ERROR:  relation "vanda" does not exist at character 22
+2019-09-24 09:48:17.013 CST [20225] STATEMENT:  select count(1) from "vanda";
+2019-09-24 09:48:26.276 CST [20225] ERROR:  relation "vanda" does not exist at character 15
+2019-09-24 09:48:26.276 CST [20225] STATEMENT:  select * from "vanda";
+2019-09-24 10:18:45.620 CST [19926] LOG:  received SIGHUP, reloading configuration files
+2019-09-24 10:18:45.621 CST [19926] LOG:  parameter "wal_compression" changed to "on"
+2019-09-24 10:47:51.294 CST [23761] LOG:  listening on IPv6 address "::1", port 5432
+2019-09-24 10:47:51.294 CST [23761] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2019-09-24 10:47:51.321 CST [23761] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2019-09-24 10:47:51.342 CST [23762] LOG:  database system was shut down at 2019-09-24 10:47:51 CST
+2019-09-24 10:47:51.346 CST [23761] LOG:  database system is ready to accept connections
+2019-09-24 10:47:51.381 CST [23761] LOG:  received SIGHUP, reloading configuration files
+2019-09-24 10:47:51.382 CST [23761] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 663, near token "2019"
+2019-09-24 10:47:51.382 CST [23761] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 664, near token "2019"
+2019-09-24 10:47:51.382 CST [23761] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 665, near token "2019"
+2019-09-24 10:47:51.382 CST [23761] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 666, near token "2019"
+2019-09-24 10:47:51.382 CST [23761] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 667, near token "2019"
+2019-09-24 10:47:51.382 CST [23761] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 668, near token "2019"
+2019-09-24 10:47:51.382 CST [23761] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 669, near token "2019"
+2019-09-24 10:47:51.382 CST [23761] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 670, near token "2019"
+2019-09-24 10:47:51.382 CST [23761] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 671, near token "2019"
+2019-09-24 10:47:51.382 CST [23761] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 672, near token "2019"
+2019-09-24 10:47:51.382 CST [23761] LOG:  configuration file "/opt/data/css/postgresql-10.10/postgresql.conf" contains errors; no changes were applied
+2019-09-24 10:51:24.487 CST [23945] ERROR:  syntax error at or near "/" at character 1
+2019-09-24 10:51:24.487 CST [23945] STATEMENT:  /l
+	create database vanda;
+2019-09-24 10:57:49.146 CST [23763] LOG:  checkpoints are occurring too frequently (14 seconds apart)
+2019-09-24 10:57:49.146 CST [23763] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 10:58:03.337 CST [23763] LOG:  checkpoints are occurring too frequently (14 seconds apart)
+2019-09-24 10:58:03.337 CST [23763] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 10:58:19.247 CST [23763] LOG:  checkpoints are occurring too frequently (16 seconds apart)
+2019-09-24 10:58:19.247 CST [23763] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 10:58:36.123 CST [23763] LOG:  checkpoints are occurring too frequently (17 seconds apart)
+2019-09-24 10:58:36.123 CST [23763] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 10:58:53.315 CST [23763] LOG:  checkpoints are occurring too frequently (17 seconds apart)
+2019-09-24 10:58:53.315 CST [23763] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 10:59:07.342 CST [23763] LOG:  checkpoints are occurring too frequently (14 seconds apart)
+2019-09-24 10:59:07.342 CST [23763] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 10:59:22.607 CST [23763] LOG:  checkpoints are occurring too frequently (15 seconds apart)
+2019-09-24 10:59:22.607 CST [23763] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 10:59:40.110 CST [23763] LOG:  checkpoints are occurring too frequently (18 seconds apart)
+2019-09-24 10:59:40.110 CST [23763] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 11:00:00.274 CST [23763] LOG:  checkpoints are occurring too frequently (20 seconds apart)
+2019-09-24 11:00:00.274 CST [23763] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 11:00:26.524 CST [23763] LOG:  checkpoints are occurring too frequently (26 seconds apart)
+2019-09-24 11:00:26.524 CST [23763] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 11:00:50.459 CST [23763] LOG:  checkpoints are occurring too frequently (24 seconds apart)
+2019-09-24 11:00:50.459 CST [23763] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 11:01:10.886 CST [23763] LOG:  checkpoints are occurring too frequently (20 seconds apart)
+2019-09-24 11:01:10.886 CST [23763] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 11:01:29.701 CST [23763] LOG:  checkpoints are occurring too frequently (19 seconds apart)
+2019-09-24 11:01:29.701 CST [23763] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 11:01:48.873 CST [23763] LOG:  checkpoints are occurring too frequently (19 seconds apart)
+2019-09-24 11:01:48.873 CST [23763] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 11:02:06.644 CST [23763] LOG:  checkpoints are occurring too frequently (18 seconds apart)
+2019-09-24 11:02:06.644 CST [23763] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 11:02:24.318 CST [23763] LOG:  checkpoints are occurring too frequently (18 seconds apart)
+2019-09-24 11:02:24.318 CST [23763] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 11:02:41.846 CST [23763] LOG:  checkpoints are occurring too frequently (17 seconds apart)
+2019-09-24 11:02:41.846 CST [23763] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 11:02:59.143 CST [23763] LOG:  checkpoints are occurring too frequently (18 seconds apart)
+2019-09-24 11:02:59.143 CST [23763] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 11:03:17.480 CST [23763] LOG:  checkpoints are occurring too frequently (18 seconds apart)
+2019-09-24 11:03:17.480 CST [23763] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 11:03:38.257 CST [23763] LOG:  checkpoints are occurring too frequently (21 seconds apart)
+2019-09-24 11:03:38.257 CST [23763] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 11:04:01.795 CST [23763] LOG:  checkpoints are occurring too frequently (23 seconds apart)
+2019-09-24 11:04:01.795 CST [23763] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 11:04:28.290 CST [23763] LOG:  checkpoints are occurring too frequently (27 seconds apart)
+2019-09-24 11:04:28.290 CST [23763] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 11:04:51.802 CST [23763] LOG:  checkpoints are occurring too frequently (23 seconds apart)
+2019-09-24 11:04:51.802 CST [23763] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 11:05:11.456 CST [23763] LOG:  checkpoints are occurring too frequently (20 seconds apart)
+2019-09-24 11:05:11.456 CST [23763] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 11:05:29.502 CST [23763] LOG:  checkpoints are occurring too frequently (18 seconds apart)
+2019-09-24 11:05:29.502 CST [23763] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 11:05:47.628 CST [23763] LOG:  checkpoints are occurring too frequently (18 seconds apart)
+2019-09-24 11:05:47.628 CST [23763] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 11:06:05.705 CST [23763] LOG:  checkpoints are occurring too frequently (18 seconds apart)
+2019-09-24 11:06:05.705 CST [23763] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 11:06:23.649 CST [23763] LOG:  checkpoints are occurring too frequently (18 seconds apart)
+2019-09-24 11:06:23.649 CST [23763] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 11:06:41.364 CST [23763] LOG:  checkpoints are occurring too frequently (18 seconds apart)
+2019-09-24 11:06:41.364 CST [23763] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 11:06:58.789 CST [23763] LOG:  checkpoints are occurring too frequently (17 seconds apart)
+2019-09-24 11:06:58.789 CST [23763] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 11:07:18.259 CST [23763] LOG:  checkpoints are occurring too frequently (20 seconds apart)
+2019-09-24 11:07:18.259 CST [23763] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 11:43:17.431 CST [26317] ERROR:  relation "pgbench_branches" does not exist at character 22
+2019-09-24 11:43:17.431 CST [26317] STATEMENT:  select count(*) from pgbench_branches
+2019-09-24 11:55:10.917 CST [23763] LOG:  checkpoints are occurring too frequently (27 seconds apart)
+2019-09-24 11:55:10.917 CST [23763] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 12:00:14.684 CST [23763] LOG:  checkpoints are occurring too frequently (4 seconds apart)
+2019-09-24 12:00:14.684 CST [23763] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 12:00:18.190 CST [23763] LOG:  checkpoints are occurring too frequently (4 seconds apart)
+2019-09-24 12:00:18.190 CST [23763] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 12:00:21.974 CST [23763] LOG:  checkpoints are occurring too frequently (3 seconds apart)
+2019-09-24 12:00:21.974 CST [23763] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 12:02:51.801 CST [23761] LOG:  received fast shutdown request
+2019-09-24 12:02:51.802 CST [23761] LOG:  aborting any active transactions
+2019-09-24 12:02:51.803 CST [23761] LOG:  worker process: logical replication launcher (PID 23768) exited with exit code 1
+2019-09-24 12:02:51.807 CST [23763] LOG:  shutting down
+2019-09-24 12:02:51.984 CST [23761] LOG:  database system is shut down
+2019-09-24 12:03:28.079 CST [27474] LOG:  listening on IPv6 address "::1", port 5432
+2019-09-24 12:03:28.079 CST [27474] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2019-09-24 12:03:28.104 CST [27474] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2019-09-24 12:03:28.125 CST [27475] LOG:  database system was shut down at 2019-09-24 12:03:27 CST
+2019-09-24 12:03:28.130 CST [27474] LOG:  database system is ready to accept connections
+2019-09-24 12:03:28.168 CST [27474] LOG:  received SIGHUP, reloading configuration files
+2019-09-24 12:03:28.168 CST [27474] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 663, near token "2019"
+2019-09-24 12:03:28.168 CST [27474] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 664, near token "2019"
+2019-09-24 12:03:28.168 CST [27474] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 665, near token "2019"
+2019-09-24 12:03:28.168 CST [27474] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 666, near token "2019"
+2019-09-24 12:03:28.168 CST [27474] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 667, near token "2019"
+2019-09-24 12:03:28.168 CST [27474] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 668, near token "2019"
+2019-09-24 12:03:28.168 CST [27474] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 669, near token "2019"
+2019-09-24 12:03:28.168 CST [27474] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 670, near token "2019"
+2019-09-24 12:03:28.168 CST [27474] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 671, near token "2019"
+2019-09-24 12:03:28.168 CST [27474] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 672, near token "2019"
+2019-09-24 12:03:28.169 CST [27474] LOG:  configuration file "/opt/data/css/postgresql-10.10/postgresql.conf" contains errors; no changes were applied
+2019-09-24 12:13:21.756 CST [27474] LOG:  received fast shutdown request
+2019-09-24 12:13:21.756 CST [27474] LOG:  aborting any active transactions
+2019-09-24 12:13:21.758 CST [27474] LOG:  worker process: logical replication launcher (PID 27481) exited with exit code 1
+2019-09-24 12:13:21.759 CST [27476] LOG:  shutting down
+2019-09-24 12:13:22.079 CST [27474] LOG:  database system is shut down
+2019-09-24 12:13:58.202 CST [28356] LOG:  listening on IPv6 address "::1", port 5432
+2019-09-24 12:13:58.202 CST [28356] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2019-09-24 12:13:58.240 CST [28356] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2019-09-24 12:13:58.254 CST [28357] LOG:  database system was shut down at 2019-09-24 12:13:58 CST
+2019-09-24 12:13:58.258 CST [28356] LOG:  database system is ready to accept connections
+2019-09-24 12:13:58.295 CST [28356] LOG:  received SIGHUP, reloading configuration files
+2019-09-24 12:13:58.296 CST [28356] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 663, near token "2019"
+2019-09-24 12:13:58.296 CST [28356] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 664, near token "2019"
+2019-09-24 12:13:58.296 CST [28356] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 665, near token "2019"
+2019-09-24 12:13:58.296 CST [28356] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 666, near token "2019"
+2019-09-24 12:13:58.296 CST [28356] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 667, near token "2019"
+2019-09-24 12:13:58.296 CST [28356] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 668, near token "2019"
+2019-09-24 12:13:58.296 CST [28356] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 669, near token "2019"
+2019-09-24 12:13:58.296 CST [28356] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 670, near token "2019"
+2019-09-24 12:13:58.296 CST [28356] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 671, near token "2019"
+2019-09-24 12:13:58.296 CST [28356] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 672, near token "2019"
+2019-09-24 12:13:58.296 CST [28356] LOG:  configuration file "/opt/data/css/postgresql-10.10/postgresql.conf" contains errors; no changes were applied
+2019-09-24 12:17:10.313 CST [28356] LOG:  received fast shutdown request
+2019-09-24 12:17:10.314 CST [28356] LOG:  aborting any active transactions
+2019-09-24 12:17:10.316 CST [28356] LOG:  worker process: logical replication launcher (PID 28363) exited with exit code 1
+2019-09-24 12:17:10.316 CST [28358] LOG:  shutting down
+2019-09-24 12:17:10.327 CST [28356] LOG:  database system is shut down
+2019-09-24 12:17:45.659 CST [28832] LOG:  listening on IPv6 address "::1", port 5432
+2019-09-24 12:17:45.659 CST [28832] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2019-09-24 12:17:45.696 CST [28832] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2019-09-24 12:17:45.710 CST [28833] LOG:  database system was shut down at 2019-09-24 12:17:45 CST
+2019-09-24 12:17:45.714 CST [28832] LOG:  database system is ready to accept connections
+2019-09-24 12:17:45.751 CST [28832] LOG:  received SIGHUP, reloading configuration files
+2019-09-24 12:17:45.752 CST [28832] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 663, near token "2019"
+2019-09-24 12:17:45.752 CST [28832] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 664, near token "2019"
+2019-09-24 12:17:45.752 CST [28832] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 665, near token "2019"
+2019-09-24 12:17:45.752 CST [28832] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 666, near token "2019"
+2019-09-24 12:17:45.752 CST [28832] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 667, near token "2019"
+2019-09-24 12:17:45.752 CST [28832] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 668, near token "2019"
+2019-09-24 12:17:45.752 CST [28832] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 669, near token "2019"
+2019-09-24 12:17:45.752 CST [28832] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 670, near token "2019"
+2019-09-24 12:17:45.752 CST [28832] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 671, near token "2019"
+2019-09-24 12:17:45.752 CST [28832] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 672, near token "2019"
+2019-09-24 12:17:45.752 CST [28832] LOG:  configuration file "/opt/data/css/postgresql-10.10/postgresql.conf" contains errors; no changes were applied
+2019-09-24 12:17:58.813 CST [28834] LOG:  checkpoints are occurring too frequently (13 seconds apart)
+2019-09-24 12:17:58.813 CST [28834] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 12:59:46.505 CST [28832] LOG:  received fast shutdown request
+2019-09-24 12:59:46.506 CST [28832] LOG:  aborting any active transactions
+2019-09-24 12:59:46.507 CST [28832] LOG:  worker process: logical replication launcher (PID 28839) exited with exit code 1
+2019-09-24 12:59:46.510 CST [28834] LOG:  shutting down
+2019-09-24 12:59:46.567 CST [28832] LOG:  database system is shut down
+2019-09-24 13:00:22.374 CST [31193] LOG:  listening on IPv6 address "::1", port 5432
+2019-09-24 13:00:22.374 CST [31193] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2019-09-24 13:00:22.405 CST [31193] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2019-09-24 13:00:22.418 CST [31194] LOG:  database system was shut down at 2019-09-24 13:00:22 CST
+2019-09-24 13:00:22.423 CST [31193] LOG:  database system is ready to accept connections
+2019-09-24 13:00:22.465 CST [31193] LOG:  received SIGHUP, reloading configuration files
+2019-09-24 13:00:22.465 CST [31193] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 664, near token "2019"
+2019-09-24 13:00:22.466 CST [31193] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 665, near token "2019"
+2019-09-24 13:00:22.466 CST [31193] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 666, near token "2019"
+2019-09-24 13:00:22.466 CST [31193] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 667, near token "2019"
+2019-09-24 13:00:22.466 CST [31193] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 668, near token "2019"
+2019-09-24 13:00:22.466 CST [31193] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 669, near token "2019"
+2019-09-24 13:00:22.466 CST [31193] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 670, near token "2019"
+2019-09-24 13:00:22.466 CST [31193] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 671, near token "2019"
+2019-09-24 13:00:22.466 CST [31193] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 672, near token "2019"
+2019-09-24 13:00:22.466 CST [31193] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 673, near token "2019"
+2019-09-24 13:00:22.466 CST [31193] LOG:  configuration file "/opt/data/css/postgresql-10.10/postgresql.conf" contains errors; no changes were applied
+2019-09-24 13:00:38.374 CST [31195] LOG:  checkpoints are occurring too frequently (16 seconds apart)
+2019-09-24 13:00:38.374 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:00:45.366 CST [31195] LOG:  checkpoints are occurring too frequently (7 seconds apart)
+2019-09-24 13:00:45.366 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:00:51.766 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:00:51.766 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:00:57.598 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:00:57.598 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:01:03.488 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:01:03.488 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:01:09.317 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:01:09.317 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:01:15.095 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:01:15.095 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:01:21.032 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:01:21.032 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:01:26.857 CST [31195] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:01:26.857 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:01:32.735 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:01:32.735 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:01:38.563 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:01:38.563 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:01:44.426 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:01:44.426 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:01:50.197 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:01:50.197 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:01:56.118 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:01:56.118 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:02:01.924 CST [31195] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:02:01.924 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:02:07.767 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:02:07.767 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:02:13.540 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:02:13.540 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:02:19.381 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:02:19.381 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:02:25.569 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:02:25.569 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:02:31.871 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:02:31.871 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:02:37.870 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:02:37.870 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:02:43.794 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:02:43.794 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:02:49.654 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:02:49.654 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:02:55.484 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:02:55.484 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:03:01.246 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:03:01.246 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:03:07.067 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:03:07.067 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:03:13.010 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:03:13.010 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:03:18.976 CST [31195] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:03:18.976 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:03:24.948 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:03:24.948 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:03:30.848 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:03:30.848 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:03:36.757 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:03:36.757 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:03:42.695 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:03:42.695 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:03:48.623 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:03:48.623 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:03:54.680 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:03:54.680 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:04:00.684 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:04:00.684 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:04:06.618 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:04:06.618 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:04:13.066 CST [31195] LOG:  checkpoints are occurring too frequently (7 seconds apart)
+2019-09-24 13:04:13.066 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:04:18.983 CST [31195] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:04:18.983 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:04:24.902 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:04:24.902 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:04:30.556 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:04:30.556 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:04:36.201 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:04:36.201 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:04:41.829 CST [31195] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:04:41.829 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:04:47.481 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:04:47.481 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:04:53.097 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:04:53.097 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:04:58.687 CST [31195] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:04:58.687 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:05:04.348 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:05:04.348 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:05:09.987 CST [31195] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:05:09.987 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:05:15.592 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:05:15.592 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:05:21.243 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:05:21.243 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:05:27.354 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:05:27.354 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:05:32.998 CST [31195] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:05:32.998 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:05:38.971 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:05:38.971 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:05:44.568 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:05:44.568 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:05:50.178 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:05:50.178 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:05:55.791 CST [31195] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:05:55.791 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:06:01.421 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:06:01.421 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:06:07.038 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:06:07.038 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:06:12.619 CST [31195] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:06:12.619 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:06:18.223 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:06:18.223 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:06:23.860 CST [31195] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:06:23.860 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:06:29.515 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:06:29.515 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:06:35.130 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:06:35.130 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:06:40.787 CST [31195] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:06:40.787 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:06:46.333 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:06:46.333 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:06:51.925 CST [31195] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:06:51.925 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:06:57.510 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:06:57.510 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:07:03.160 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:07:03.160 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:07:08.814 CST [31195] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:07:08.814 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:07:14.435 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:07:14.435 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:07:19.985 CST [31195] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:07:19.985 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:07:25.600 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:07:25.600 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:07:31.202 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:07:31.202 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:07:36.784 CST [31195] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:07:36.784 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:07:42.381 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:07:42.381 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:07:48.020 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:07:48.020 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:07:53.670 CST [31195] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:07:53.670 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:07:59.303 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:07:59.303 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:08:04.913 CST [31195] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:08:04.913 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:08:10.561 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:08:10.561 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:08:16.256 CST [31195] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:08:16.256 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:08:21.903 CST [31195] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:08:21.903 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:08:31.401 CST [31195] LOG:  checkpoints are occurring too frequently (10 seconds apart)
+2019-09-24 13:08:31.401 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:12:07.667 CST [31195] LOG:  checkpoints are occurring too frequently (4 seconds apart)
+2019-09-24 13:12:07.667 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:12:11.842 CST [31195] LOG:  checkpoints are occurring too frequently (4 seconds apart)
+2019-09-24 13:12:11.842 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:12:16.214 CST [31195] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:12:16.214 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:12:20.335 CST [31195] LOG:  checkpoints are occurring too frequently (4 seconds apart)
+2019-09-24 13:12:20.335 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:12:24.266 CST [31195] LOG:  checkpoints are occurring too frequently (4 seconds apart)
+2019-09-24 13:12:24.266 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:12:29.059 CST [31195] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:12:29.059 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:12:33.360 CST [31195] LOG:  checkpoints are occurring too frequently (4 seconds apart)
+2019-09-24 13:12:33.360 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:12:37.241 CST [31195] LOG:  checkpoints are occurring too frequently (4 seconds apart)
+2019-09-24 13:12:37.241 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:12:41.165 CST [31195] LOG:  checkpoints are occurring too frequently (4 seconds apart)
+2019-09-24 13:12:41.165 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:12:45.108 CST [31195] LOG:  checkpoints are occurring too frequently (4 seconds apart)
+2019-09-24 13:12:45.108 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:12:49.331 CST [31195] LOG:  checkpoints are occurring too frequently (4 seconds apart)
+2019-09-24 13:12:49.331 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:12:53.398 CST [31195] LOG:  checkpoints are occurring too frequently (4 seconds apart)
+2019-09-24 13:12:53.398 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:12:57.739 CST [31195] LOG:  checkpoints are occurring too frequently (4 seconds apart)
+2019-09-24 13:12:57.739 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:13:01.715 CST [31195] LOG:  checkpoints are occurring too frequently (4 seconds apart)
+2019-09-24 13:13:01.715 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:13:05.833 CST [31195] LOG:  checkpoints are occurring too frequently (4 seconds apart)
+2019-09-24 13:13:05.833 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:13:15.312 CST [31195] LOG:  checkpoints are occurring too frequently (10 seconds apart)
+2019-09-24 13:13:15.312 CST [31195] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:25:39.621 CST [31193] LOG:  received fast shutdown request
+2019-09-24 13:25:39.622 CST [31193] LOG:  aborting any active transactions
+2019-09-24 13:25:39.623 CST [31193] LOG:  worker process: logical replication launcher (PID 31200) exited with exit code 1
+2019-09-24 13:25:39.625 CST [31195] LOG:  shutting down
+2019-09-24 13:25:39.691 CST [31193] LOG:  database system is shut down
+2019-09-24 13:26:25.862 CST [325] LOG:  listening on IPv6 address "::1", port 5432
+2019-09-24 13:26:25.862 CST [325] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2019-09-24 13:26:25.892 CST [325] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2019-09-24 13:26:25.909 CST [326] LOG:  database system was shut down at 2019-09-24 13:26:25 CST
+2019-09-24 13:26:25.913 CST [325] LOG:  database system is ready to accept connections
+2019-09-24 13:26:25.949 CST [325] LOG:  received SIGHUP, reloading configuration files
+2019-09-24 13:26:25.950 CST [325] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 664, near token "2019"
+2019-09-24 13:26:25.950 CST [325] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 665, near token "2019"
+2019-09-24 13:26:25.950 CST [325] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 666, near token "2019"
+2019-09-24 13:26:25.950 CST [325] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 667, near token "2019"
+2019-09-24 13:26:25.950 CST [325] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 668, near token "2019"
+2019-09-24 13:26:25.950 CST [325] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 669, near token "2019"
+2019-09-24 13:26:25.950 CST [325] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 670, near token "2019"
+2019-09-24 13:26:25.950 CST [325] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 671, near token "2019"
+2019-09-24 13:26:25.950 CST [325] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 672, near token "2019"
+2019-09-24 13:26:25.950 CST [325] LOG:  syntax error in file "/opt/data/css/postgresql-10.10/postgresql.conf" line 673, near token "2019"
+2019-09-24 13:26:25.950 CST [325] LOG:  configuration file "/opt/data/css/postgresql-10.10/postgresql.conf" contains errors; no changes were applied
+2019-09-24 13:26:42.203 CST [327] LOG:  checkpoints are occurring too frequently (17 seconds apart)
+2019-09-24 13:26:42.203 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:26:49.052 CST [327] LOG:  checkpoints are occurring too frequently (7 seconds apart)
+2019-09-24 13:26:49.052 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:26:55.439 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:26:55.439 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:27:01.312 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:27:01.312 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:27:07.187 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:27:07.187 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:27:13.084 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:27:13.084 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:27:18.951 CST [327] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:27:18.951 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:27:24.897 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:27:24.897 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:27:30.832 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:27:30.832 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:27:36.728 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:27:36.728 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:27:42.645 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:27:42.645 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:27:48.432 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:27:48.432 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:27:54.318 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:27:54.318 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:28:00.194 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:28:00.194 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:28:05.978 CST [327] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:28:05.978 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:28:11.886 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:28:11.886 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:28:17.780 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:28:17.780 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:28:23.656 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:28:23.656 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:28:29.621 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:28:29.621 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:28:35.602 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:28:35.602 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:28:41.553 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:28:41.553 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:28:47.571 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:28:47.571 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:28:53.419 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:28:53.419 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:28:59.254 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:28:59.254 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:29:05.134 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:29:05.134 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:29:11.017 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:29:11.017 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:29:16.909 CST [327] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:29:16.909 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:29:22.751 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:29:22.751 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:29:28.588 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:29:28.588 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:29:34.427 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:29:34.427 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:29:40.231 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:29:40.231 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:29:46.132 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:29:46.132 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:29:51.996 CST [327] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:29:51.996 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:29:57.908 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:29:57.908 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:30:03.782 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:30:03.782 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:30:09.646 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:30:09.646 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:30:15.501 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:30:15.501 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:30:21.345 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:30:21.345 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:30:27.175 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:30:27.175 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:30:32.724 CST [327] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:30:32.724 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:30:38.296 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:30:38.296 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:30:43.835 CST [327] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:30:43.835 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:30:49.379 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:30:49.379 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:30:54.918 CST [327] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:30:54.918 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:31:00.497 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:31:00.497 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:31:05.947 CST [327] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:31:05.947 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:31:11.512 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:31:11.512 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:31:17.029 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:31:17.029 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:31:22.551 CST [327] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:31:22.551 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:31:28.015 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:31:28.015 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:31:33.612 CST [327] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:31:33.612 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:31:39.070 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:31:39.070 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:31:44.600 CST [327] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:31:44.600 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:31:50.091 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:31:50.091 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:31:55.743 CST [327] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:31:55.743 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:32:01.297 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:32:01.297 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:32:06.914 CST [327] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:32:06.914 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:32:12.464 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:32:12.464 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:32:18.016 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:32:18.016 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:32:23.503 CST [327] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:32:23.503 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:32:29.079 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:32:29.079 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:32:34.611 CST [327] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:32:34.611 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:32:40.149 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:32:40.149 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:32:45.667 CST [327] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:32:45.667 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:32:51.271 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:32:51.271 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:32:56.839 CST [327] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:32:56.839 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:33:02.404 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:33:02.404 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:33:07.901 CST [327] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:33:07.901 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:33:13.395 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:33:13.395 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:33:18.949 CST [327] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:33:18.949 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:33:24.475 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:33:24.475 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:33:29.973 CST [327] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:33:29.973 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:33:35.514 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:33:35.514 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:33:41.141 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:33:41.141 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:33:46.702 CST [327] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:33:46.702 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:33:52.206 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:33:52.206 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:33:57.796 CST [327] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:33:57.796 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:34:03.320 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:34:03.320 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:34:08.934 CST [327] LOG:  checkpoints are occurring too frequently (5 seconds apart)
+2019-09-24 13:34:08.934 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:34:14.493 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:34:14.493 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:34:20.032 CST [327] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+2019-09-24 13:34:20.032 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:34:29.215 CST [327] LOG:  checkpoints are occurring too frequently (9 seconds apart)
+2019-09-24 13:34:29.215 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:38:04.591 CST [327] LOG:  checkpoints are occurring too frequently (4 seconds apart)
+2019-09-24 13:38:04.591 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:38:08.466 CST [327] LOG:  checkpoints are occurring too frequently (4 seconds apart)
+2019-09-24 13:38:08.466 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:38:12.492 CST [327] LOG:  checkpoints are occurring too frequently (4 seconds apart)
+2019-09-24 13:38:12.492 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:38:16.384 CST [327] LOG:  checkpoints are occurring too frequently (4 seconds apart)
+2019-09-24 13:38:16.384 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:38:20.204 CST [327] LOG:  checkpoints are occurring too frequently (4 seconds apart)
+2019-09-24 13:38:20.204 CST [327] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2019-09-24 13:38:23.821 CST [325] LOG:  received fast shutdown request
+2019-09-24 13:38:23.822 CST [325] LOG:  aborting any active transactions
+2019-09-24 13:38:23.822 CST [559] FATAL:  terminating connection due to administrator command
+2019-09-24 13:38:23.822 CST [559] STATEMENT:  alter table pgbench_accounts add primary key (aid)
+2019-09-24 13:38:23.823 CST [325] LOG:  worker process: logical replication launcher (PID 332) exited with exit code 1
+2019-09-24 13:38:25.427 CST [327] LOG:  shutting down
+2019-09-24 13:38:25.600 CST [325] LOG:  database system is shut down
