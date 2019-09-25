@@ -27,9 +27,10 @@ collect_sys_info ${output_dir} ${css_status}
 echo "export output_dir=${output_dir}" > ./output.dir
 #collect some extra information
 pginfo=${output_dir}/postgresql.opts
-psql -c 'show shared_buffers' postgres > ${pginfo} 
-psql -c 'show wal_compression' postgres >> ${pginfo} 
-psql -c 'show max_wal_size' postgres >> ${pginfo} 
+cmd_psql=${app_basedir}/bin/psql
+${cmd_psql} -c 'show shared_buffers' postgres > ${pginfo} 
+${cmd_psql} -c 'show wal_compression' postgres >> ${pginfo} 
+${cmd_psql} -c 'show max_wal_size' postgres >> ${pginfo} 
 
 echo "will run workload(s) ${workload_set}"
 for workload in ${workload_set};
@@ -87,7 +88,7 @@ for workload in ${workload_set};
         # sleep ${sleep_after_case}
         sleep 60
         echo -e "select pg_database_size('${dbname}')/1024/1024/1024||'G'
-" | psql postgres > ${output_dir}/${workload_fname}.pgdbsize
+" | ${cmd_psql} postgres > ${output_dir}/${workload_fname}.pgdbsize
         #du --block-size=1G ${app_datadir} > ${output_dir}/${workload_fname}.2dbsize
         #cat /sys/block/${dev_id}/sfx_smart_features/sfx_capacity_stat >> ${output_dir}/${workload_fname}.2dbsize
     done

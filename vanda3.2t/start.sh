@@ -15,5 +15,5 @@ sleep 5
 
 #create test database for pgbench to benchmark
 echo -e "create database ${dbname} 
-\q" | psql postgres
+\q" | ${app_basedir}/bin/psql postgres
 
