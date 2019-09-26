@@ -85,10 +85,10 @@ function gen_benchinfo_postgres() {
     ssd_name=$1
     scale=$2
     pushd ${output_dir}
- 
+    fillfactor=ff$4 
     dbsize=`expr ${scale} \* 16 / 1024 `
-    echo -e "ssd=${ssd_name} dbsize=${dbsize}G" >> ./bench.info
-    new_name=${output_dir##*/}_${ssd_name%3.2t}_${dbsize}G
+    echo -e "ssd=${ssd_name} dbsize=${dbsize}G_${fillfactor}" >> ./bench.info
+    new_name=${output_dir##*/}_${ssd_name%3.2t}_${dbsize}G_${fillfactor}
     new_file=${output_dir%/*}/${new_name}
     mv ${output_dir} ${new_file}
     zip -r ${output_dir%/*}/${new_name}.zip ../${new_name} -x "../${new_name}/*.log" "../${new_name}/*.sfx_message"

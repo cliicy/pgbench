@@ -61,7 +61,8 @@ for workload in ${workload_set};
 	#cp ./workload/${workload} ${output_dir}
 	# run postgreSQL workload, all parameters are from case-cfg/cfg_file
         if [ "${cmd}" == "load" ]; then
-            cmdline="time ${app_basedir}/bin/pgbench -i --unlogged-tables -s ${scale} -U ${user} -h ${host} -n -q -d ${dbname}"
+            cmdline="time ${app_basedir}/bin/pgbench -i -s ${scale} -F ${fillfact} -U ${user} -h ${host} -n -q -d ${dbname}"
+            #cmdline="time ${app_basedir}/bin/pgbench -i --unlogged-tables -s ${scale} -F ${fillfact} -U ${user} -h ${host} -n -q -d ${dbname}"
         else
             cmdline="time ${app_basedir}/bin/pgbench -r -j ${jobs} -c ${threads} -P ${rpt_interval} -T ${run_time} -U ${user} -h ${host} -d ${dbname}"
         fi
@@ -88,7 +89,7 @@ for workload in ${workload_set};
         # sleep ${sleep_after_case}
         sleep 60
         echo -e "select pg_database_size('${dbname}')/1024/1024/1024||'G'
-" | ${cmd_psql} postgres > ${output_dir}/${workload_fname}.pgdbsize
+" | ${cmd_psql} ${dbname} > ${output_dir}/${workload_fname}.pgdbsize
         #du --block-size=1G ${app_datadir} > ${output_dir}/${workload_fname}.2dbsize
         #cat /sys/block/${dev_id}/sfx_smart_features/sfx_capacity_stat >> ${output_dir}/${workload_fname}.2dbsize
     done
@@ -97,5 +98,6 @@ generate_csv ${output_dir}
 get_dbsize_csv ${output_dir}
 
 ssd_name=$(basename "$PWD")
-gen_benchinfo_postgres ${ssd_name} ${scale} ${output_dir}
+ffactor=`echo -e "\d+ pgbench_accounts" | ${cmd_psql} ${dbname} | grep fillfactor | cut -d ':' -f2 | cut -d '=' -f2`
+gen_benchinfo_postgres ${ssd_name} ${scale} ${output_dir} ${ffactor}
 

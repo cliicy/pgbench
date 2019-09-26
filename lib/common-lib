@@ -25,6 +25,23 @@ function extract_sysbench_result () {
     grep "\[" ${result_file} | sed -r 's/.*thds:\s([0-9]+)\stps:\s([0-9.]+)\sqps:\s([0-9.]+).*%\):\s([0-9.]+).*/\1,\2,\3,\4/g' >> csv/${result_file}.csv 
 }
 
+function extract_pgbench_result () {
+    result_file=$1
+    phrase=${result_file##*/}
+    phrase=${phrase%.result}
+    if [ "${phrase}" = "load" ]; then
+        echo "user,system,elapsed(M:S),%CPU" > csv/${result_file}.csv
+        #grep "%CPU" ${result_file} | sed -r 's/^([0-9.]+)user\s([0-9.]+)system\s([0-9]+)[:0-9.]+elapsed\s([0-9%.]+)CPU.*/\1,\2,\3,\4/g' >> csv/${result_file}.csv 
+        grep "%CPU" ${result_file} | sed -r 's/^([0-9.]+)user\s([0-9.]+)system\s([0-9:.]+)elapsed\s([0-9%.]+)CPU.*/\1,\2,\3,\4/g' >> csv/${result_file}.csv 
+    elif [ "${phrase}" = "run" ]; then
+        avg_latency=`cat ${result_file} | grep -m 1 "latency average" | cut -d '=' -f2 | awk '{print $1}'`
+        echo "tps,latency avg(ms),time(s)" > csv/${result_file}.csv
+        tps=`cat ${result_file} | grep -m 1 tps | cut -d '=' -f2 | awk '{print $1}'`
+        duration=`cat ${result_file} | grep -m 1 duration | awk '{print $7}'`
+        echo "${tps},${avg_latency},${duration}" >> csv/${result_file}.csv 
+    fi
+}
+
 function generate_csv() {
     # this function is to convert Sysbench test output to CSV file,
     # and convert iostat result (CPU/IO) to CSV file.
@@ -39,6 +56,9 @@ function generate_csv() {
 
         grep -e "sysbench" -m 1 $f
         if [ $? -eq 0 ]; then extract_sysbench_result $f; continue; fi
+
+        grep -e "pgbench" -m 1 $f
+        if [ $? -eq 0 ]; then extract_pgbench_result $f; continue; fi
     done
 
     for f in `ls *.iostat | grep -v -e prepare`;
