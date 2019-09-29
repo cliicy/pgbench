@@ -64,7 +64,8 @@ for workload in ${workload_set};
             cmdline="time ${app_basedir}/bin/pgbench -i -s ${scale} -F ${fillfact} -U ${user} -h ${host} -n -q -d ${dbname}"
             #cmdline="time ${app_basedir}/bin/pgbench -i --unlogged-tables -s ${scale} -F ${fillfact} -U ${user} -h ${host} -n -q -d ${dbname}"
         else
-            cmdline="time ${app_basedir}/bin/pgbench -r -j ${jobs} -c ${threads} -P ${rpt_interval} -T ${run_time} -U ${user} -h ${host} -d ${dbname}"
+            cmdline="time ${app_basedir}/bin/pgbench -r -j ${jobs} -c ${clients} -P ${rpt_interval} -T ${run_time} -U ${user} -h ${host} ${dbname} \ 
+                     -f ./workloads/vandat.sql"
         fi
         echo ${cmdline} >> ${pginfo}
         if [ "${cmd}" == "load" ]; then
