@@ -6,9 +6,10 @@ if [ ! -e ${cfg_file} ]; then echo "can't find configuration file [${cfg_file}]"
 source ${cfg_file}
 
 ${app_basedir}/bin/initdb -D ${app_datadir}
-${app_basedir}/bin/pg_ctl -D ${app_datadir} -l ${app_dbglog} start
 cp -f ${app_pgconf} ${app_datadir}
-${app_basedir}/bin/pg_ctl restart -D ${app_datadir}
+${app_basedir}/bin/pg_ctl -D ${app_datadir} -l ${app_dbglog} start
+
+#${app_basedir}/bin/pg_ctl restart -D ${app_datadir}
 #${app_basedir}/bin/pg_ctl reload -D ${app_datadir}
 
 sleep 5

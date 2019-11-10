@@ -1,0 +1,10 @@
+#!/bin/bash
+## $1 /dev/sfxxxx
+## $2 2 or 4 or 6 how many partitions of disk will be parted
+
+sfxcss=$1
+echo "will partion $1"
+sudo parted /dev/sfdv0n1 mklabel gpt
+sudo parted /dev/sfdv0n1 mkpart primary 0 100%
+
+

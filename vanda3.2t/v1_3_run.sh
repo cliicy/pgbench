@@ -34,7 +34,6 @@ ${cmd_psql} -c 'show max_wal_size' postgres >> ${pginfo}
 ps aux | grep postgresql | grep -v grep >> ${pginfo}
 
 echo "will run workload(s) ${workload_set}"
-lastwl=`echo ${workload_set} | awk '{print $NF}'`
 for workload in ${workload_set};
     do
         echo "run workload ${workload}"
@@ -44,8 +43,8 @@ for workload in ${workload_set};
         if [ "prepare" == "${workload}" ]; then cmd="prepare"; workload="oltp_common"; workload_fname="prepare"; fi
         echo -e "sfx_message starts at: " `date +%Y-%m-%d\ %H:%M:%S` "\n"  > ${output_dir}/${workload_fname}.sfx_message
         sudo chmod 666 /var/log/sfx_messages;
-	#tail -f -n 0 /var/log/sfx_messages >> ${output_dir}/${workload_fname}.sfx_message &
-        #echo $! > ${output_dir}/tail.${workload_fname}.pid
+	tail -f -n 0 /var/log/sfx_messages >> ${output_dir}/${workload_fname}.sfx_message &
+        echo $! > ${output_dir}/tail.${workload_fname}.pid
         echo "iostat start at: " `date +%Y-%m-%d\ %H:%M:%S` > ${output_dir}/${workload_fname}.iostat
         tail -f -n 0 ${app_dbglog} > ${output_dir}/${workload_fname}.${app}.log &
         echo $! > ${output_dir}/tail.${workload_fname}.${app}.log.pid
@@ -78,9 +77,19 @@ for workload in ${workload_set};
 
         if [ "${cmd}" == "run" ];
         then
-                #start_blk_trace ${output_dir} ${workload_fname} ${disk} 120 &
-                ps -ef | grep blktrace | grep -v grep | awk '{print $2}' | xargs kill -15
+                start_blk_trace ${output_dir} ${workload_fname} ${disk} 120 &
+                #start_blk_trace ${output_dir} ${workload_fname} ${disk} 120 ${run_time} &
         fi
+
+        echo "sysbench \
+                --db-driver=pgsql --pgsql-db=${dbname} --pgsql-user=${user} \
+                --report-interval=${rpt_interval} --time=${run_time} --threads=${threads} \
+                --percentile=${percentile} ${sysbench_dir}/${workload}.lua\
+                --warmup-time=${warmup_time} --rand-type=${rand_type} --histogram=on \
+                --tables=${table_count} --table-size=${table_size} \
+                --create-table-options="${create_tbl_opt}" \
+                --table-data-src-file=${table_data_src_file} \
+                ${cmd}"
 
         time sysbench \
                 --db-driver=pgsql --pgsql-db=${dbname} --pgsql-user=${user} \
@@ -89,7 +98,6 @@ for workload in ${workload_set};
                 --warmup-time=${warmup_time} --rand-type=${rand_type} --histogram=on \
                 --tables=${table_count} --table-size=${table_size} \
                 --create-table-options="${create_tbl_opt}" \
-                --create_index_options="${create_tbl_opt}" \
                 --table-data-src-file=${table_data_src_file} \
                 ${cmd} \
                 >> ${output_dir}/${workload_fname}.result
@@ -110,22 +118,12 @@ for workload in ${workload_set};
         rm -f ${output_dir}/${workload_fname}.iostat.pid
         kill `cat ${output_dir}/tail.${workload_fname}.${app}.log.pid`
         rm -f ${output_dir}/tail.${workload_fname}.${app}.log.pid
-        sleep ${sleep_after_case}
-
+        # sleep ${sleep_after_case}
+        sleep 600
         # manaully run vacuum to clean up the garbages start
-        if [ "${workload_fname}" == "prepare" ] || [ "${workload_fname}" != "prepare" && "${workload_fname}" != "${lastwl}" ]; then
-        #if [ "${workload_fname}" != "prepare" ] ; then
-            v_flag=`echo ${vacuum_type} | awk '{print $2}'`
-            v_flag=${v_flag:-}
-            vacuum_flag=vacuum.${v_flag}
-	    vacuum_flag=${vacuum_flag%.}	
-            echo "${vacuum_type}" > ${output_dir}/${workload_fname}.${vacuum_flag}
-            echo -e "\n${vacuum_type} starts at: `date +%Y-%m-%d_%H:%M:%S`\n"  >> ${output_dir}/${workload_fname}.${vacuum_flag}
-            echo -e "select * from pg_stat_user_tables where relname = '${tbname}';" | ${cmd_psql} ${dbname} >> ${output_dir}/${workload_fname}.${vacuum_flag}
-            echo -e "${vacuum_type} ;" | ${cmd_psql} ${dbname} >> ${output_dir}/${workload_fname}.${vacuum_flag}
-            echo -e "select * from pg_stat_user_tables where relname = '${tbname}';" | ${cmd_psql} ${dbname} >> ${output_dir}/${workload_fname}.${vacuum_flag}
-            echo -e "\n${vacuum_type} ends at: `date +%Y-%m-%d_%H:%M:%S`\n"  >> ${output_dir}/${workload_fname}.${vacuum_flag}
-        fi
+        echo -e "select * from pg_stat_user_tables where relname = '${tbname}';" | ${cmd_psql} ${dbname} > ${output_dir}/${workload_fname}.vacuum
+        echo -e "vacuum;" | ${cmd_psql} ${dbname} >> ${output_dir}/${workload_fname}.vacuum
+        echo -e "select * from pg_stat_user_tables where relname = '${tbname}';" | ${cmd_psql} ${dbname} >> ${output_dir}/${workload_fname}.vacuum
         # manaully run vacuum to clean up the garbages end 
 
         echo -e "select pg_database_size('${dbname}')/1024/1024/1024||'G'
@@ -141,7 +139,6 @@ ssd_name=$(basename "$PWD")
 #ffactor=`echo -e "\d+ pg_trigger" | ${cmd_psql} ${dbname} | grep fillfactor | cut -d ':' -f2 | cut -d '=' -f2`
 #ffactor=`echo -e "\d+ pgbench_accounts" | ${cmd_psql} ${dbname} | grep fillfactor | cut -d ':' -f2 | cut -d '=' -f2`
 #gen_benchinfo_postgres ${ssd_name} ${scale} ${output_dir} ${ffactor}
-ffactor=`echo -e "\d+ ${tbname}" | ${cmd_psql} ${dbname} | grep "Options: fillfactor" | cut -d ':' -f2 | cut -d '=' -f2`
-gen_benchinfo_postgres ${ssd_name} ${table_count}.${table_size} ${output_dir} ${ffactor}
-#echo "${ssd_name} ${table_count}.${table_size} ${output_dir} ${ffactor}" >> ${output_dir}/ben.info
+ffactor=`echo -e "\d+ ${tbname}" | ${cmd_psql} ${dbname} | grep fillfactor | cut -d ':' -f2 | cut -d '=' -f2`
+gen_benchinfo_postgres ${ssd_name} ${table_count}.${table_size} ${output_dir} ${ffactor} 
 

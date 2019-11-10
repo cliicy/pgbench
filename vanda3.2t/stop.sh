@@ -1,14 +1,16 @@
 #!/bin/bash
 
 if [ "${app_datadir}" == "" ]; then
-    app_datadir=/opt/data/css/postgresql-10.10/
+    app_datadir=/opt/data/vanda/postgresql-10.10/
 fi
 
 if [ "${app_basedir}" == "" ]; then
     app_basedir=/opt/app/postgresql-10.10
 fi
 
-${app_basedir}/bin/pg_ctl -D ${app_datadir} stop
+if [ -d "${app_datadir}" ]; then
+    ${app_basedir}/bin/pg_ctl -D ${app_datadir} stop
+fi
 
 kill -9 `ps aux | grep -v grep | grep -e bin/postgres | cut -c 10-15`
 

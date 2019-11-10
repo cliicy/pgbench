@@ -15,9 +15,10 @@ then
     cmpr_list=("none")
     cup_list=("perf")
     aw_list=("off")
-    avl_ratio_list=("best")
+    avl_ratio_list=("normal")
     sb_large=./sysbench-cfg/benchmark.cfg
     sb_small=./sysbench-cfg/benchmark.cfg
+    # run_workloads="prepare"
     run_workloads="prepare oltp_update_index oltp_update_non_index oltp_read_write oltp_write_only oltp_read_only"
 else
     cmpr_list=("none")
@@ -26,7 +27,7 @@ else
     avl_ratio_list=("normal")
     sb_large=./sysbench-cfg/benchmark.cfg
     sb_small=./sysbench-cfg/benchmark.cfg
-    run_workloads="prepare"
+    run_workloads="oltp_update_index oltp_update_non_index"
 fi
 
 cpu_cores=`lscpu | grep "^CPU(s):" | sed -r 's/\s+/,/g' | cut -d , -f 2`
@@ -74,8 +75,8 @@ do
                 # here an empty dummy cfg file is dirty hack used to
                 # pass parameter check
                 #
-                ./1_prep_dev.sh ./sysbench-cfg/dummy.cfg
-                ./2_initdb.sh   ./sysbench-cfg/dummy.cfg
+#                ./1_prep_dev.sh ./sysbench-cfg/dummy.cfg
+#                ./2_initdb.sh   ./sysbench-cfg/dummy.cfg
                 export threads=$((${cpu_cores}*2))
                 export workload_set=${run_workloads}
                 ./3_run.sh      ./sysbench-cfg/dummy.cfg

@@ -89,7 +89,6 @@ for workload in ${workload_set};
                 --warmup-time=${warmup_time} --rand-type=${rand_type} --histogram=on \
                 --tables=${table_count} --table-size=${table_size} \
                 --create-table-options="${create_tbl_opt}" \
-                --create_index_options="${create_tbl_opt}" \
                 --table-data-src-file=${table_data_src_file} \
                 ${cmd} \
                 >> ${output_dir}/${workload_fname}.result
@@ -113,19 +112,14 @@ for workload in ${workload_set};
         sleep ${sleep_after_case}
 
         # manaully run vacuum to clean up the garbages start
-        if [ "${workload_fname}" == "prepare" ] || [ "${workload_fname}" != "prepare" && "${workload_fname}" != "${lastwl}" ]; then
+        #if [ "${workload_fname}" == "prepare" ] || [ "${workload_fname}" != "prepare" && "${workload_fname}" != "${lastwl}" ]; then
         #if [ "${workload_fname}" != "prepare" ] ; then
-            v_flag=`echo ${vacuum_type} | awk '{print $2}'`
-            v_flag=${v_flag:-}
-            vacuum_flag=vacuum.${v_flag}
-	    vacuum_flag=${vacuum_flag%.}	
-            echo "${vacuum_type}" > ${output_dir}/${workload_fname}.${vacuum_flag}
-            echo -e "\n${vacuum_type} starts at: `date +%Y-%m-%d_%H:%M:%S`\n"  >> ${output_dir}/${workload_fname}.${vacuum_flag}
-            echo -e "select * from pg_stat_user_tables where relname = '${tbname}';" | ${cmd_psql} ${dbname} >> ${output_dir}/${workload_fname}.${vacuum_flag}
-            echo -e "${vacuum_type} ;" | ${cmd_psql} ${dbname} >> ${output_dir}/${workload_fname}.${vacuum_flag}
-            echo -e "select * from pg_stat_user_tables where relname = '${tbname}';" | ${cmd_psql} ${dbname} >> ${output_dir}/${workload_fname}.${vacuum_flag}
-            echo -e "\n${vacuum_type} ends at: `date +%Y-%m-%d_%H:%M:%S`\n"  >> ${output_dir}/${workload_fname}.${vacuum_flag}
-        fi
+            echo -e "\n${vacuum_type} starts at: `date +%Y-%m-%d_%H:%M:%S`\n"  > ${output_dir}/${workload_fname}.vacuum
+            echo -e "select * from pg_stat_user_tables where relname = '${tbname}';" | ${cmd_psql} ${dbname} >> ${output_dir}/${workload_fname}.vacuum
+            echo -e "${vacuum_type} ;" | ${cmd_psql} ${dbname} >> ${output_dir}/${workload_fname}.vacuum
+            echo -e "select * from pg_stat_user_tables where relname = '${tbname}';" | ${cmd_psql} ${dbname} >> ${output_dir}/${workload_fname}.vacuum
+            echo -e "\n${vacuum_type} ends at: `date +%Y-%m-%d_%H:%M:%S`\n"  >> ${output_dir}/${workload_fname}.vacuum
+        #fi
         # manaully run vacuum to clean up the garbages end 
 
         echo -e "select pg_database_size('${dbname}')/1024/1024/1024||'G'

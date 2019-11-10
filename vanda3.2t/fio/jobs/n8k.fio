@@ -1,0 +1,1 @@
+fio -filename=/dev/sfdv0n1 -direct=1 -iodepth 1 -thread -rw=randwrite -ioengine=psync -bs=1k -size=80G -numjobs=1 -runtime=60 -group_reporting -name=postgres_vanda

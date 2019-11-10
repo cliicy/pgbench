@@ -8,7 +8,7 @@ source ${cfg_file}
 # output_dir will be used in fio.sh, so make it global
 if [ "${output_dir}" == "" ];
 then
-        export output_dir=${result_dir}/${logfolder}-`date +%Y%m%d_%H%M%S`${case_id}
+        export output_dir=${result_dir}/${logfolder}-`date +%Y%m%d_%H%M%S`${case_id}.tpcc
 fi
 
 echo "test output will be saved in ${output_dir}"
@@ -33,19 +33,18 @@ ${cmd_psql} -c 'show wal_compression' postgres >> ${pginfo}
 ${cmd_psql} -c 'show max_wal_size' postgres >> ${pginfo} 
 ps aux | grep postgresql | grep -v grep >> ${pginfo}
 
-echo "will run workload(s) ${workload_set}"
-lastwl=`echo ${workload_set} | awk '{print $NF}'`
-for workload in ${workload_set};
+echo "will run workload(s) ${tpcc_workload_set}"
+lastwl=`echo ${tpcc_workload_set} | awk '{print $NF}'`
+for workload in ${tpcc_workload_set};
     do
         echo "run workload ${workload}"
-	cmd="run"
+	cmd=${workload}
         # workload friendly name. it will be used in fio.sh, so make it global
         export workload_fname=${workload}
-        if [ "prepare" == "${workload}" ]; then cmd="prepare"; workload="oltp_common"; workload_fname="prepare"; fi
         echo -e "sfx_message starts at: " `date +%Y-%m-%d\ %H:%M:%S` "\n"  > ${output_dir}/${workload_fname}.sfx_message
         sudo chmod 666 /var/log/sfx_messages;
-	#tail -f -n 0 /var/log/sfx_messages >> ${output_dir}/${workload_fname}.sfx_message &
-        #echo $! > ${output_dir}/tail.${workload_fname}.pid
+	tail -f -n 0 /var/log/sfx_messages >> ${output_dir}/${workload_fname}.sfx_message &
+        echo $! > ${output_dir}/tail.${workload_fname}.pid
         echo "iostat start at: " `date +%Y-%m-%d\ %H:%M:%S` > ${output_dir}/${workload_fname}.iostat
         tail -f -n 0 ${app_dbglog} > ${output_dir}/${workload_fname}.${app}.log &
         echo $! > ${output_dir}/tail.${workload_fname}.${app}.log.pid
@@ -59,42 +58,23 @@ for workload in ${workload_set};
         iostat -txdmc ${rpt_interval} ${disk} >> ${output_dir}/${workload_fname}.iostat &
         echo $! > ${output_dir}/${workload_fname}.iostat.pid
 
-	#cp ./workload/${workload} ${output_dir}
-	# run postgreSQL workload, all parameters are from case-cfg/cfg_file
-        #if [ "${cmd}" == "load" ]; then
-        #    cmdline="time ${app_basedir}/bin/pgbench -i -s ${scale} -F ${fillfact} -U ${user} -h ${host} -n -q -d ${dbname}"
-        #    #cmdline="time ${app_basedir}/bin/pgbench -i --unlogged-tables -s ${scale} -F ${fillfact} -U ${user} -h ${host} -n -q -d ${dbname}"
-        #else
-        #    cmdline="time ${app_basedir}/bin/pgbench -r -j ${jobs} -c ${clients} -P ${rpt_interval} -T ${run_time} -U ${user} -h ${host} ${dbname} \ 
-        #             -f ./workloads/vandat.sql"
-        #fi
-	
-        #echo ${cmdline} >> ${pginfo}
-        #if [ "${cmd}" == "load" ]; then
-        #    time ${cmdline} >> ${output_dir}/${workload_fname}.result 2>&1  
-        #else
-        #    time ${cmdline} >> ${output_dir}/${workload_fname}.result   
-        #fi
-
         if [ "${cmd}" == "run" ];
         then
-                #start_blk_trace ${output_dir} ${workload_fname} ${disk} 120 &
+                start_blk_trace ${output_dir} ${workload_fname} ${disk} 120 &
                 ps -ef | grep blktrace | grep -v grep | awk '{print $2}' | xargs kill -15
         fi
-
-        time sysbench \
+        pushd ${sysbench_tpcc_dir}
+        time ./tpcc.lua \
                 --db-driver=pgsql --pgsql-db=${dbname} --pgsql-user=${user} \
                 --report-interval=${rpt_interval} --time=${run_time} --threads=${threads} \
-                --percentile=${percentile} ${sysbench_dir}/${workload}.lua\
+                --percentile=${percentile} \
                 --warmup-time=${warmup_time} --rand-type=${rand_type} --histogram=on \
-                --tables=${table_count} --table-size=${table_size} \
-                --create-table-options="${create_tbl_opt}" \
-                --create_index_options="${create_tbl_opt}" \
-                --table-data-src-file=${table_data_src_file} \
+                --tables=${tpcc_table_count} --scale=${tpcc_scale_size} \
+                --trx_level=RC --db-ps-mode=auto --use_fk=0 --enable_purge=yes \
                 ${cmd} \
                 >> ${output_dir}/${workload_fname}.result
-
-        ps aux | grep sysbench | grep -v grep >> ${pginfo}
+        popd
+        ps aux | grep tpcc.lua | grep -v grep >> ${pginfo}
 
         du --block-size=1G ${app_datadir} > ${output_dir}/${workload_fname}.dbsize
         cat /sys/block/${dev_name}/sfx_smart_features/sfx_capacity_stat >> ${output_dir}/${workload_fname}.dbsize
@@ -113,24 +93,19 @@ for workload in ${workload_set};
         sleep ${sleep_after_case}
 
         # manaully run vacuum to clean up the garbages start
-        if [ "${workload_fname}" == "prepare" ] || [ "${workload_fname}" != "prepare" && "${workload_fname}" != "${lastwl}" ]; then
-        #if [ "${workload_fname}" != "prepare" ] ; then
-            v_flag=`echo ${vacuum_type} | awk '{print $2}'`
-            v_flag=${v_flag:-}
-            vacuum_flag=vacuum.${v_flag}
-	    vacuum_flag=${vacuum_flag%.}	
-            echo "${vacuum_type}" > ${output_dir}/${workload_fname}.${vacuum_flag}
-            echo -e "\n${vacuum_type} starts at: `date +%Y-%m-%d_%H:%M:%S`\n"  >> ${output_dir}/${workload_fname}.${vacuum_flag}
-            echo -e "select * from pg_stat_user_tables where relname = '${tbname}';" | ${cmd_psql} ${dbname} >> ${output_dir}/${workload_fname}.${vacuum_flag}
-            echo -e "${vacuum_type} ;" | ${cmd_psql} ${dbname} >> ${output_dir}/${workload_fname}.${vacuum_flag}
-            echo -e "select * from pg_stat_user_tables where relname = '${tbname}';" | ${cmd_psql} ${dbname} >> ${output_dir}/${workload_fname}.${vacuum_flag}
-            echo -e "\n${vacuum_type} ends at: `date +%Y-%m-%d_%H:%M:%S`\n"  >> ${output_dir}/${workload_fname}.${vacuum_flag}
+        #if [ "${workload_fname}" == "prepare" ] || [ "${workload_fname}" != "${lastwl}" ]; then
+        if [ "${workload_fname}" == "prepare" ]; then
+            echo -e "\nvacumme  starts at: `date +%Y-%m-%d_%H:%M:%S`\n"  > ${output_dir}/${workload_fname}.vacuum
+            echo -e "select * from pg_stat_user_tables where relname = '${tpcc_tbname}';" | ${cmd_psql} ${dbname} >> ${output_dir}/${workload_fname}.vacuum
+            echo -e "vacuum;" | ${cmd_psql} ${dbname} >> ${output_dir}/${workload_fname}.vacuum
+            echo -e "select * from pg_stat_user_tables where relname = '${tpcc_tbname}';" | ${cmd_psql} ${dbname} >> ${output_dir}/${workload_fname}.vacuum
+            echo -e "\nvacumme  ends at: `date +%Y-%m-%d_%H:%M:%S`\n"  >> ${output_dir}/${workload_fname}.vacuum
         fi
         # manaully run vacuum to clean up the garbages end 
 
         echo -e "select pg_database_size('${dbname}')/1024/1024/1024||'G'
 " | ${cmd_psql} ${dbname} > ${output_dir}/${workload_fname}.pgdbsz
-        echo -e "select pg_indexes_size('${tbname}')/1024/1024/1024||'G'
+        echo -e "select pg_indexes_size('${tpcc_tbname}')/1024/1024/1024||'G'
 " | ${cmd_psql} ${dbname} > ${output_dir}/${workload_fname}.pgindexsz
     done
 
@@ -141,7 +116,7 @@ ssd_name=$(basename "$PWD")
 #ffactor=`echo -e "\d+ pg_trigger" | ${cmd_psql} ${dbname} | grep fillfactor | cut -d ':' -f2 | cut -d '=' -f2`
 #ffactor=`echo -e "\d+ pgbench_accounts" | ${cmd_psql} ${dbname} | grep fillfactor | cut -d ':' -f2 | cut -d '=' -f2`
 #gen_benchinfo_postgres ${ssd_name} ${scale} ${output_dir} ${ffactor}
-ffactor=`echo -e "\d+ ${tbname}" | ${cmd_psql} ${dbname} | grep "Options: fillfactor" | cut -d ':' -f2 | cut -d '=' -f2`
-gen_benchinfo_postgres ${ssd_name} ${table_count}.${table_size} ${output_dir} ${ffactor}
+ffactor=`echo -e "\d+ ${tpcc_tbname}" | ${cmd_psql} ${dbname} | grep "Options: fillfactor" | cut -d ':' -f2 | cut -d '=' -f2`
+gen_benchinfo_postgres ${ssd_name} ${tpcc_table_count}.${tpcc_scale_size} ${output_dir} ${ffactor}
 #echo "${ssd_name} ${table_count}.${table_size} ${output_dir} ${ffactor}" >> ${output_dir}/ben.info
 
