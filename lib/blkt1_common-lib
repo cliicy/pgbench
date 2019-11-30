@@ -68,7 +68,7 @@ function truncate_sys_tables() {
     # clear data in MySQL performance schema tables. it is useful when 
     # counter data within certain time range is being collected
     ${mysql_basedir}/bin/mysql \
-            --socket=${mysql_socket} -u${mysql_user} \
+            --socket=${mysql_socket} -u${mysql_user} -p${mysql_pwd} \
             -e "call sys.ps_truncate_all_tables(0)"
 }
 
@@ -80,7 +80,7 @@ function collect_index_info () {
 
     if [ "output_file" == "" ]; then output_file=index_${timestamp}.txt; fi
     ${mysql_basedir}/bin/mysql \
-            --socket=${mysql_socket} -u${mysql_user} \
+            --socket=${mysql_socket} -u${mysql_user} -p${mysql_pwd} \
             -e "SELECT * FROM INFORMATION_SCHEMA.INNODB_SYS_INDEXES" \
             > ${output_file}
 }
@@ -92,7 +92,7 @@ function collect_index_page_info () {
     if [ "output_file" == "" ]; then output_file=index_page_${timestamp}.txt; fi
 
     ${mysql_basedir}/bin/mysql \
-            --socket=${mysql_socket} -u${mysql_user} \
+            --socket=${mysql_socket} -u${mysql_user} -p${mysql_pwd} \
             -e "SELECT * FROM INFORMATION_SCHEMA.INNODB_METRICS where (NAME like '%index_page_merge%' or NAME like '%index_page_split%')" \
             > ${output_file}
 }
@@ -104,20 +104,20 @@ function collect_perf_counter_redolog() {
     if [ "output_file" == "" ]; then output_file=lat_${timestamp}.txt; fi
 
     ${mysql_basedir}/bin/mysql \
-            --socket=${mysql_socket} -u${mysql_user} \
+            --socket=${mysql_socket} -u${mysql_user} -p${mysql_pwd} \
             -e "select * from sys.x\$io_global_by_file_by_latency where file like '%ib_logfile%'" > ${output_file}
     ${mysql_basedir}/bin/mysql \
-            --socket=${mysql_socket} -u${mysql_user} \
+            --socket=${mysql_socket} -u${mysql_user} -p${mysql_pwd} \
             -e "select * from sys.x\$io_global_by_wait_by_latency where event_name like '%innodb_log_file%'" >> ${output_file} 
 }
 
 function start_collect_mysql_lat_act() {
-    mysqlcmd="${mysql_basedir}/bin/mysql -u${mysql_user} --socket=${mysql_socket}"
+    mysqlcmd="${mysql_basedir}/bin/mysql -u${mysql_user} -p${mysql_pwd} --socket=${mysql_socket}"
     out_dir=$1
     run_time=$2
     workload=$3
 
-    if [[ "${workload}" == "prepare" ]] || [[ "${workload}" == "" ]]; then return 0; fi
+    if [ "${workload}" == "prepare" or "${workload}" == "" ]; then return 0; fi
 
     # lat_sql="select * from sys.x\$io_global_by_file_by_latency where file like '%ib_logfile%'"
     # act_sql="select * from sys.x\$io_global_by_file_by_bytes where file like '%ib_logfile%'"
@@ -125,8 +125,6 @@ function start_collect_mysql_lat_act() {
     act_sql="select * from sys.x\$io_global_by_file_by_bytes"
 
     if [ "${out_dir}" == "" ]; then out_dir=./; fi
-
-    echo "Start collecting MySQL lat / act counter"
 
     for((i=0;i<$((${run_time}/5));i++));
     do
@@ -157,31 +155,36 @@ function start_blk_trace() {
     out_dir=$1
     case_name=$2
     dev_name=$3
-    blk_run_time_sec=$4
-    filters="-a queue"
+    run_time_sec=$4
 
     if [ "${out_dir}" == "" ]; then out_dir = "./"; fi
     if [ ! -e ${out_dir}/btrace ]; then mkdir -p ${out_dir}/btrace; fi
-    if [ "${dev_name}" == "" ]; then return 1; fi
-    if [ "${blk_run_time_sec}" == "" ]; then blk_run_time_sec = 60; fi
+    if [ "${dev_name}" == "" ]; then return -1; fi
+    if [ "${run_time_sec}" == "" ]; then run_time_sec = 60; fi
 
-    echo "workload run time - ${run_time} seconds"
-    echo "blktrace run time - ${blk_run_time_sec} seconds"
+    #runt=`grep "^export run_time=" *.cfg | cut -d '=' -f2`
+    runt=$5
+    echo ${runt}-----
+    bltstart=`expr $runt - ${run_time_sec} -  60`
+    wlpid=`ps -ef | grep sysbench  |grep .lua | awk '{print $2}'`
+    for i in {0..500000};
+    do
+        outinfo=`ps -p ${wlpid} -o pid,start_time,etime,comm`
+        echo ${outinfo} >> ${out_dir}/btrace/blk.time
+        etime=`echo ${outinfo} | grep ${wlpid} | awk '{print $7}' `
+        em=`echo ${etime} | cut -d : -f1` 
+        es=`echo ${etime} | cut -d : -f2` 
+        elaspt=`expr ${em} \* 60 + ${es}`
+        echo "if [ ${elaspt} -ge ${bltstart} ]; then"
+        if [ ${elaspt} -ge ${bltstart} ]; then
+            echo "sudo blktrace -d ${dev_name} -D ${out_dir}/btrace -o ${case_name} -w${run_time_sec}"
+            sudo blktrace -d ${dev_name} -D ${out_dir}/btrace -o ${case_name} -w${run_time_sec}
+            break
+        fi
+        sleep 3 
+        echo -e "\n" >> ${out_dir}/btrace/blk.time
+    done
 
-    if [ ${run_time} -ge $((${blk_run_time_sec}+30)) ];
-    then
-        sleep_sec=$((${run_time}+${warmup_time}-${blk_run_time_sec}-30))
-        echo "wait time ${sleep_sec} seconds"
-        sleep ${sleep_sec}
-    else
-        echo "workload run time is less than blktrace run time, will use workload run time as blktrace run time"
-        blk_run_time_sec=${run_time}
-    fi
-    echo `date` > ${out_dir}/btrace/${case_name}.timing
-    blktrace_cmd="sudo blktrace ${filters} -d ${dev_name} -D ${out_dir}/btrace -o ${case_name} -w${blk_run_time_sec}"
-    echo "${blktrace_cmd}"
-    ${blktrace_cmd}
-    echo `date` >> ${out_dir}/btrace/${case_name}.timing
 }
 
 function collect_sys_info() {
@@ -225,17 +228,5 @@ function collect_sys_info() {
     echo -e "\n[filesystem]"	>> ${local_output_dir}/sysinfo.txt
     findmnt			>> ${local_output_dir}/sysinfo.txt
     echo -e "\n[css-status]"    >> ${local_output_dir}/sysinfo.txt
-
-    stat ${css_status} > /dev/null
-    if [ $? -eq 0 ];
-    then
-        sudo ${css_status}          >> ${local_output_dir}/sysinfo.txt
-    else
-        which css-status.sh
-        if [ $? -eq 0 ];
-        then
-            sudo css-status.sh      >> ${local_output_dir}/sysinfo.txt
-        fi
-    fi
+    sudo ${css_status}          >> ${local_output_dir}/sysinfo.txt
 }
-

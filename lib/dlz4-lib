@@ -1,0 +1,22 @@
+#!/bin/bash
+
+function compress_dbfiles() {
+    pushd $1
+    for f in `ls *`;
+    do
+    echo "lz4 -c ${f} > $2/${f}.lz4"
+    lz4 -c ${f} > $2/${f}.lz4
+    done
+    popd
+}
+
+function decompress_dbfiles() {
+    pushd $1
+    for f in `ls *`;
+    do
+    #lz4 -d ${f}
+    lz4 -d ${f} > $2/${f%.lz4}
+    #rm -rf ${f}
+    done
+    popd
+}

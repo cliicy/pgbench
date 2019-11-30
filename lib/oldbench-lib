@@ -95,7 +95,7 @@ function gen_benchinfo_postgres() {
     mv ${output_dir} ${new_file}
     zip -r ${output_dir%/*}/${new_name}.zip ../${new_name} -x "../${new_name}/*.log" "../${new_name}/*.sfx_message" "../${new_name}/btrace/*"
     zip -r btrace.zip btrace
-    rm -rf btrace
+    rm -rf btrace 
     popd
 }
 
@@ -114,7 +114,7 @@ function get_dbsize_new() {
     cat $f | grep -m 1 'RunTime(ms)' | cut -d , -f ${ldt_fields} >> ${ldt_name}
     done
 
-    dbs="workload,physical_size (GB),logical_size (GB),comp_ratio,du_BG"
+    dbs="workload,physical_size (GB),logical_size (GB),comp_ratio"
 
     echo ${dbs} > csv/dbsz.csv
 
@@ -122,18 +122,47 @@ function get_dbsize_new() {
     do
         wkload=${f%.dbsize}
         szlist=`grep -A1 physical_size ${f} | grep -e [0-9] | awk '{print $2","$3","$4}'`
-        du_BG=`grep -B1 physical_size ${f} | grep -e [0-9] | awk '{print $1}'`
-        if [ "${du_BG}" == '' ]; then
-            du_BG=`tail -1 ${f} | awk '{print $1}'`
-        fi
-        echo "${wkload},${szlist},${du_BG}" >> csv/dbsz.csv
+        echo "${wkload},${szlist}" >> csv/dbsz.csv
     done
     popd
 }
 
-function get_vacuum_time() {
-#grep -r -e 'vacuum starts at:' -e 'vacuum ends at:'
-#grep -r -e 'vacuum starts at:' -e 'vacuum ends at:' | cut -d '/' -f2 | awk '{print $1','$4}
-#grep -r -e 'vacuum starts at:' -e 'vacuum ends at:' | sed -r "s/.*ff([0-9]+).*\/(.*).vacuum.*at:(.*)\:/\1,\2,\3/g"
-    echo "aa"
+function generate_fio_csv() {
+    # this function is to convert Sysbench test output to CSV file,
+    # and convert iostat result (CPU/IO) to CSV file.
+    output_dir=$1
+    pushd ${output_dir}
+    if [ ! -e csv ]; then mkdir csv; fi
+
+    latc="lat (us)"
+    bwh=" write throughput MB/s"
+    latv=" "
+    bwv=" "
+    for f in `ls *.out`;
+    do
+        outfile=${f##*/}
+        outflag=${outfile%.out}
+
+        if [ -z "${disk}" ]; then
+            disk=`echo ${outflag} | cut -d '_' -f1`
+        fi
+
+        latc=${latc},${outflag}
+        bwh=${bwh},${outflag}
+
+        vv=`grep -w "lat (usec): min" $f | cut -d ',' -f3 | cut -d '=' -f2`
+        bw=`grep -w "WRITE: bw" $f | cut -d '=' -f2 | cut -d ',' -f1 | awk '{print $2}' | sed -r 's/\(([0-9.]+).*/\1/g'`
+        #echo $vv
+        latv=${latv},${vv}
+        bwv=${bwv},${bw}
+    done
+
+    csv_file=${output_dir}/csv/fio_${disk}.csv
+    echo ${latc}>${csv_file}
+    echo ${latv}>>${csv_file}
+
+    echo -e "\n\n" >>${csv_file}
+    echo ${bwh}>>${csv_file}
+    echo ${bwv}>>${csv_file}
 }
+
